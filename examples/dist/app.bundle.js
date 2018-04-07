@@ -794,8 +794,8 @@ var FreqDistModel = function () {
   }
 
   /*
-   * Reduce data to a set of categories and count the frequency in the view by accessing
-   * the length of the values array.
+   * Reduce categorical data into a univariate value. Frequency in the view is
+   * accessed by the reading the length of the values array.
    * @param {string} key - data column to group by
    */
 
@@ -835,7 +835,8 @@ var d3 = __webpack_require__(0);
 /*
  * Frequency Distribution Tables – How frequently is data distributed at each measure?
  *
- * The first column contains the measure ordered from highest to lowest, the second column contains the number of cases (frequency) of that measure.
+ * The first column contains the measure and the second column contains the number of
+ * cases (frequency) of that measure.
  */
 
 var FreqDistTable = function () {
@@ -851,13 +852,21 @@ var FreqDistTable = function () {
   _createClass(FreqDistTable, [{
     key: 'init',
     value: function init() {
+      var totals = 0;
+
+      this.data.forEach(function (d) {
+        totals += d.values.length;
+      });
+
       d3.select('figcaption').text(this.caption);
 
-      d3.select('thead').html('<tr><th>' + this.measure.charAt(0).toUpperCase() + this.measure.slice(1) + '</th><th>Frequency</th></tr>');
+      d3.select('thead').html('<tr><th>' + this.measure + '</th><th>Frequency</th></tr>');
 
       d3.select('tbody').selectAll('.row').data(this.data).enter().append('tr').attr('class', 'row').html(function (d) {
         return '<td>' + d.key + '</td><td>' + d.values.length + '</td>';
       });
+
+      d3.select('tbody').append('tr').attr('class', 'row').html('<td>Total</td><td>' + totals + '</td>');
 
       d3.select('small').html('<span>Source: </span>' + this.attribution);
     }

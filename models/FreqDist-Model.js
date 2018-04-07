@@ -9,8 +9,8 @@ export default class FreqDistModel {
   }
 
   /*
-   * Reduce data to a set of categories and count the frequency in the view by
-   * accessing the length of the values array.
+   * Reduce categorical data into a univariate value. Frequency in the view is
+   * accessed by the reading the length of the values array.
    * @param {string} key - data column to group by
    */
   group(key) {

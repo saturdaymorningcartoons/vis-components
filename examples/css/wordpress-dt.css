@@ -24,6 +24,7 @@ thead tr th {
   font-family: Verdana, Geneva, sans-serif;
   font-size: 12px;
   text-align: left;
+  text-transform: capitalize;
   color: #333;
 }
 
@@ -36,6 +37,7 @@ tbody tr td {
   text-overflow: ellipsis;
   font-size: 12px;
   transition: .5s;
+  text-transform: capitalize;
 }
 
 tbody tr:nth-child(odd) td {
@@ -45,6 +47,10 @@ tbody tr:nth-child(odd) td {
 tbody tr:nth-child(even):hover td,
 tbody tr:nth-child(odd):hover td {
   background-color: #e8e8e8;
+}
+
+tbody tr:last-child {
+  font-weight: bold;
 }
 
 small {
