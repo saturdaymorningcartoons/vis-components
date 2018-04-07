@@ -751,6 +751,10 @@ var _FreqDistTableView = __webpack_require__(3);
 
 var _FreqDistTableView2 = _interopRequireDefault(_FreqDistTableView);
 
+var _TableView = __webpack_require__(4);
+
+var _TableView2 = _interopRequireDefault(_TableView);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var d3 = __webpack_require__(0);
@@ -759,12 +763,16 @@ d3.csv('./data/engineering-interest.csv', function (error, data) {
   if (error) throw error;
 
   d3.text('../templates/table.html', function (str) {
-    d3.select('.container').html(str);
+    // tag the figure with an identifier
+    d3.select('.container').html(str).select('figure').attr('id', 'first');
+
+    new _TableView2.default(data, 'first', 'Table 1.1 Survey of Engineering Interest').init();
+
+    d3.select('.container').append('div').html(str).select('figure').attr('id', 'second');
 
     var model = new _FreqDistModel2.default(data).group('group');
-    console.log(model);
 
-    new _FreqDistTableView2.default(model, 'group', 'Numbers for Engineering Interest Study', 'Nineteen year followup of engineer interests').init();
+    new _FreqDistTableView2.default(model, 'second', 'group', 'Table 1.2, Participant Totals', 'Strong, E. K., Jr. Nineteen-year followup of engineer interests. J. appl. Psychol., 1952, 36, 65-74.').init();
   });
 });
 
@@ -840,10 +848,11 @@ var d3 = __webpack_require__(0);
  */
 
 var FreqDistTable = function () {
-  function FreqDistTable(data, m, c, a) {
+  function FreqDistTable(data, i, m, c, a) {
     _classCallCheck(this, FreqDistTable);
 
     this.data = data;
+    this.identity = i;
     this.measure = m;
     this.caption = c;
     this.attribution = a;
@@ -858,17 +867,19 @@ var FreqDistTable = function () {
         totals += d.values.length;
       });
 
-      d3.select('figcaption').text(this.caption);
+      var figure = d3.select('figure#' + this.identity);
 
-      d3.select('thead').html('<tr><th>' + this.measure + '</th><th>Frequency</th></tr>');
+      figure.select('figcaption').text(this.caption);
 
-      d3.select('tbody').selectAll('.row').data(this.data).enter().append('tr').attr('class', 'row').html(function (d) {
+      figure.select('thead').html('<tr><th>' + this.measure + '</th><th>Frequency</th></tr>');
+
+      figure.select('tbody').attr('class', 'freq-dist').selectAll('.row').data(this.data).enter().append('tr').attr('class', 'row').html(function (d) {
         return '<td>' + d.key + '</td><td>' + d.values.length + '</td>';
       });
 
-      d3.select('tbody').append('tr').attr('class', 'row').html('<td>Total</td><td>' + totals + '</td>');
+      figure.select('tbody').append('tr').attr('class', 'row').html('<td>Total</td><td>' + totals + '</td>');
 
-      d3.select('small').html('<span>Source: </span>' + this.attribution);
+      figure.select('small').html('<span>Source: </span>' + this.attribution);
     }
   }]);
 
@@ -876,6 +887,58 @@ var FreqDistTable = function () {
 }();
 
 exports.default = FreqDistTable;
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var d3 = __webpack_require__(0);
+
+var Table = function () {
+  function Table(data, i, c) {
+    _classCallCheck(this, Table);
+
+    this.data = data;
+    this.identity = i;
+    this.caption = c;
+  }
+
+  _createClass(Table, [{
+    key: 'init',
+    value: function init() {
+      var figure = d3.select('figure#' + this.identity);
+
+      figure.select('figcaption').text(this.caption);
+
+      figure.select('thead').append('tr').selectAll('th').data(Object.keys(this.data[0])).enter().append('th').text(function (d) {
+        return d;
+      });
+
+      var row = figure.select('tbody').selectAll('.row').data(this.data).enter().append('tr').attr('class', 'row');
+
+      row.selectAll('.cell').data(function (d) {
+        return Object.values(d);
+      }).enter().append('td').attr('class', 'cell').text(function (d) {
+        return d;
+      });
+    }
+  }]);
+
+  return Table;
+}();
+
+exports.default = Table;
 
 /***/ })
 /******/ ]);

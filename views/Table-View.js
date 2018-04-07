@@ -11,7 +11,7 @@ export default class Table {
 
   init() {
     const figure = d3.select(`figure#${this.identity}`);
-    
+
     figure.select('figcaption')
         .text(this.caption);
 

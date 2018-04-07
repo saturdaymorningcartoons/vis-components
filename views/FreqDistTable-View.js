@@ -9,8 +9,9 @@ const d3 = require('../lib/d3.custom.min.js');
  * cases (frequency) of that measure.
  */
 export default class FreqDistTable {
-  constructor(data, m, c, a) {
+  constructor(data, i, m, c, a) {
     this.data = data;
+    this.identity = i;
     this.measure = m;
     this.caption = c;
     this.attribution = a;
@@ -23,25 +24,28 @@ export default class FreqDistTable {
       totals += d.values.length;
     });
 
-    d3.select('figcaption')
+    const figure = d3.select(`figure#${this.identity}`);
+
+    figure.select('figcaption')
          .text(this.caption);
 
-    d3.select('thead')
+    figure.select('thead')
         .html(`<tr><th>${this.measure}</th><th>Frequency</th></tr>`);
 
-    d3.select('tbody')
+    figure.select('tbody')
+        .attr('class', 'freq-dist')
         .selectAll('.row')
         .data(this.data)
       .enter().append('tr')
         .attr('class', 'row')
         .html(d => `<td>${d.key}</td><td>${d.values.length}</td>`);
 
-    d3.select('tbody')
+    figure.select('tbody')
         .append('tr')
         .attr('class', 'row')
         .html(`<td>Total</td><td>${totals}</td>`);
 
-    d3.select('small')
+    figure.select('small')
         .html(`<span>Source: </span>${this.attribution}`);
   }
 }
