@@ -1,3 +1,7 @@
+figure {
+  width: 490px;
+}
+
 figcaption {
   font-family: Raleway, sans-serif;
   font-size: 14px;
@@ -49,7 +53,7 @@ tbody tr:nth-child(odd):hover td {
   background-color: #e8e8e8;
 }
 
-tbody tr:last-child {
+tbody.freq-dist tr:last-child {
   font-weight: bold;
 }
 
