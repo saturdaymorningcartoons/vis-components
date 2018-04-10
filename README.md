@@ -8,3 +8,4 @@ To run the examples:
 - cd into the `examples` directory
 - run a local server, e.g. `python -m http.server 8888`
 - visit that port on your browser `localhost:8888`
+- to re-bundle scripts after any local changes run `npm run bundle` in the root directory
