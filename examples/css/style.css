@@ -1,0 +1,63 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  font-family: 'Lato', sans-serif;
+  margin-top: 55px;
+}
+
+.container table {
+  border-collapse: collapse;
+  margin-top: 35px;
+  text-align: center;
+  font-size: 14px;
+  margin-bottom: 15px;
+}
+
+.container table thead tr,
+.container table tbody tr,
+.container table tfoot tr {
+  height: 35px;
+}
+
+.container table thead,
+.container table tbody,
+.container table tfoot {
+  border: 0.5px solid #404040;
+}
+
+.container table tbody tr {
+  height: 30px;
+}
+
+.container table thead th,
+.container table tbody td,
+.container table tbody th,
+.container table tfoot th,
+.container table tfoot td {
+  width: 152px;
+  border-left: 0.5px solid #404040;
+  border-right: 0.5px solid #404040;
+}
+
+.container table thead th:first-of-type,
+.container table tbody th:first-of-type,
+.container table tfoot th:first-of-type {
+  width: 200px;
+}
+
+.container table tbody tr th:first-of-type {
+  text-align: left;
+  padding-left: 10px; 
+}
+
+.container table thead th:first-of-type,
+.container table thead th:last-of-type,
+.container table tfoot th:first-of-type {
+  opacity: 0.5;
+}
+
+.container table caption {
+  margin-bottom: 5px;
+}
