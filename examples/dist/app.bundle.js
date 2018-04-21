@@ -760,10 +760,11 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var d3 = __webpack_require__(0);
 
 var model = new _FrequencyModel2.default(['defectiveDimensions', 'nonDefectiveDimensions'], ['porous', 'nonPorous']);
+var data = model.init();
 
-new _AbsoluteFrequencyTable2.default('.container', model.init(), ['Porous', 'Non-Porous', 'With defective dimensions', 'Without defective dimensions'], 'Classification of 6805 moulded pieces of vulcanite.').init();
+new _AbsoluteFrequencyTable2.default('.container', data, ['Porous', 'Non-Porous', 'With defective dimensions', 'Without defective dimensions'], 'Classification of 6805 moulded pieces of vulcanite.').init();
 
-new _ClassificationTable2.default('.container', model.init(), ['Porous', 'Non-Porous', 'With defective dimensions', 'Without defective dimensions'], 'Classification of 6805 moulded pieces of vulcanite.<br>Frequencies in per cent.').init();
+new _ClassificationTable2.default('.container', data, ['Porous', 'Non-Porous', 'With defective dimensions', 'Without defective dimensions'], 'Classification of 6805 moulded pieces of vulcanite.<br>Frequencies in per cent.').init();
 
 /***/ }),
 /* 2 */
