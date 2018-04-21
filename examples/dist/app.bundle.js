@@ -743,11 +743,15 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 "use strict";
 
 
-var _ClassificationTable = __webpack_require__(2);
+var _AbsoluteFrequencyTable = __webpack_require__(2);
+
+var _AbsoluteFrequencyTable2 = _interopRequireDefault(_AbsoluteFrequencyTable);
+
+var _ClassificationTable = __webpack_require__(3);
 
 var _ClassificationTable2 = _interopRequireDefault(_ClassificationTable);
 
-var _FrequencyModel = __webpack_require__(3);
+var _FrequencyModel = __webpack_require__(4);
 
 var _FrequencyModel2 = _interopRequireDefault(_FrequencyModel);
 
@@ -757,10 +761,75 @@ var d3 = __webpack_require__(0);
 
 var model = new _FrequencyModel2.default(['defectiveDimensions', 'nonDefectiveDimensions'], ['porous', 'nonPorous']);
 
+new _AbsoluteFrequencyTable2.default('.container', model.init(), ['Porous', 'Non-Porous', 'With defective dimensions', 'Without defective dimensions'], 'Classification of 6805 moulded pieces of vulcanite.').init();
+
 new _ClassificationTable2.default('.container', model.init(), ['Porous', 'Non-Porous', 'With defective dimensions', 'Without defective dimensions'], 'Classification of 6805 moulded pieces of vulcanite.<br>Frequencies in per cent.').init();
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var d3 = __webpack_require__(0);
+
+/*
+ * A tabulation of the absolute frequency of two events and the corresponding
+ * combinations of events.
+ *
+ */
+
+var AbsoluteFrequencyTable = function () {
+    function AbsoluteFrequencyTable(el, data, l, c) {
+        _classCallCheck(this, AbsoluteFrequencyTable);
+
+        this.mount = el;
+        this.data = data;
+        this.labels = l;
+        this.caption = c;
+    }
+
+    _createClass(AbsoluteFrequencyTable, [{
+        key: 'init',
+        value: function init() {
+            var a1 = this.data[0],
+                a2 = this.data[1],
+                a3 = this.data[2],
+                a4 = this.data[3],
+                n = this.data[4];
+
+            var table = d3.select(this.mount).append('table');
+
+            table.append('caption').html(this.caption);
+
+            table.append('thead').append('tr').html('<th>Event</th><th>' + this.labels[0] + '</th><th>' + this.labels[1] + '</th><th>Total</th>');
+
+            var tbody = table.append('tbody');
+
+            tbody.append('tr').html('<th>' + this.labels[2] + '</th><td>' + a1 + '</td><td>' + a2 + '</td><td>' + (a1 + a2) + '</td>');
+
+            tbody.append('tr').html('<th>' + this.labels[3] + '</th><td>' + a3 + '</td><td>' + a4 + '</td><td>' + (a3 + a4) + '</td>');
+
+            table.append('tfoot').append('tr').html('<th>Total</th><td>' + (a1 + a3) + '</td><td>' + (a2 + a4) + '</td><td>' + n + '</td>');
+        }
+    }]);
+
+    return AbsoluteFrequencyTable;
+}();
+
+exports.default = AbsoluteFrequencyTable;
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -795,7 +864,6 @@ var ClassificationTable = function () {
                 a4 = this.data[3],
                 n = this.data[4];
 
-            console.log(this.data);
             var table = d3.select(this.mount).append('table');
 
             table.append('caption').html(this.caption);
@@ -825,7 +893,7 @@ var ClassificationTable = function () {
 exports.default = ClassificationTable;
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -839,7 +907,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var alasql = __webpack_require__(4);
+var alasql = __webpack_require__(5);
 var d3 = __webpack_require__(0);
 
 var FrequencyModel = function () {
@@ -906,7 +974,7 @@ var FrequencyModel = function () {
 exports.default = FrequencyModel;
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5629,16 +5697,16 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
           return t = t || e.name || "download", r || (e = h(e)), navigator.msSaveOrOpenBlob(e, t);
         } : (f.abort = function () {}, f.readyState = f.INIT = 0, f.WRITING = 1, f.DONE = 2, f.error = f.onwritestart = f.onprogress = f.onwrite = f.onabort = f.onerror = f.onwriteend = null, p);
       }
-    }("undefined" != typeof self && self || "undefined" != typeof window && window || this.content);"undefined" != typeof module && module.exports ? module.exports.saveAs = be : "undefined" != "function" && null !== __webpack_require__(8) && null !== __webpack_require__(9) && !(__WEBPACK_AMD_DEFINE_RESULT__ = (function () {
+    }("undefined" != typeof self && self || "undefined" != typeof window && window || this.content);"undefined" != typeof module && module.exports ? module.exports.saveAs = be : "undefined" != "function" && null !== __webpack_require__(9) && null !== __webpack_require__(10) && !(__WEBPACK_AMD_DEFINE_RESULT__ = (function () {
       return be;
     }).call(exports, __webpack_require__, exports, module),
 				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__)), (C.isCordova || C.isMeteorServer || C.isNode) && console.warn("It looks like you are using the browser version of AlaSQL. Please use the alasql.fs.js file instead."), _A.utils.saveAs = be;
   }return new J("alasql"), _A.use("alasql"), _A;
 });
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5), __webpack_require__(6)(module), __webpack_require__(7)))
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(6), __webpack_require__(7)(module), __webpack_require__(8)))
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports) {
 
 // shim for using process in browser
@@ -5828,7 +5896,7 @@ process.umask = function() { return 0; };
 
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports) {
 
 module.exports = function(module) {
@@ -5856,7 +5924,7 @@ module.exports = function(module) {
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports) {
 
 var g;
@@ -5883,7 +5951,7 @@ module.exports = g;
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports) {
 
 module.exports = function() {
@@ -5892,7 +5960,7 @@ module.exports = function() {
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports) {
 
 /* WEBPACK VAR INJECTION */(function(__webpack_amd_options__) {/* globals __webpack_amd_options__ */
